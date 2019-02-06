@@ -8,6 +8,8 @@ namespace WebApplication1.Models
 {
     public class HeaderTagViewModel
     {
+        public IEnumerable<SelectListItem> Antani { get; set; }
+        public string AntaniSelected { get; set; }
         public HeaderTagViewModel()
         {
             itemTagConfigList = new List<ItemTagConfigViewModel>();
@@ -23,4 +25,12 @@ namespace WebApplication1.Models
         public string Selectedgender { get; set; }
       
     }
+
+    public class CustomKeyValue<T, T1>
+    {
+        public T Text { get; set; }
+        public T1 Value { get; set; }
+    }
+
+
 }

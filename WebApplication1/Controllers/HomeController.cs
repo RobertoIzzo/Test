@@ -33,11 +33,17 @@ namespace WebApplication1.Controllers
         {
             HeaderTagViewModel model = new HeaderTagViewModel();
             model.ItemTagID = "star";
-
-
-            ItemTagConfigViewModel itemTagConfigView1 = new ItemTagConfigViewModel();
+            string selectedgender1 = "woman";
             var newgenders = new List<string>() { "man", "woman", "kids", "girls" };
-            string selectedgender1 = "kids";
+
+            model.Antani = newgenders.Select(x => new SelectListItem()
+            {
+                Text = x.ToString(),
+                Value = x.ToString(),
+                Selected = selectedgender1 == x.ToString()
+            });
+            model.AntaniSelected = selectedgender1;
+            ItemTagConfigViewModel itemTagConfigView1 = new ItemTagConfigViewModel();
             itemTagConfigView1.Genders = newgenders.Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
@@ -47,16 +53,7 @@ namespace WebApplication1.Controllers
             itemTagConfigView1.Selectedgender = selectedgender1;
             model.itemTagConfigList.Add(itemTagConfigView1);
 
-            ItemTagConfigViewModel itemTagConfigView2 = new ItemTagConfigViewModel();
-            string selectedgender2 = "man";
-            itemTagConfigView2.Genders = newgenders.Select(x => new SelectListItem()
-            {
-                Text = x.ToString(),
-                Value = x.ToString(),
-                Selected = selectedgender2 == x.ToString()
-            });
-            itemTagConfigView2.Selectedgender = selectedgender2;
-            model.itemTagConfigList.Add(itemTagConfigView2);
+
             return View(model);
         }
 
@@ -66,27 +63,25 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConf(HeaderTagViewModel model)
         {
-            string selectedgender1 = "woman";
-            var newgenders1 = new List<string>() { "man", "woman", "kids", "girls" };
-            model.itemTagConfigList[0].Genders = newgenders1.Select(x => new SelectListItem()
-            {
-                Text = x.ToString(),
-                Value = x.ToString(),
-                Selected = selectedgender1 == x.ToString()
-            });
-            model.itemTagConfigList[0].Selectedgender = selectedgender1;
-
-
-
-            string selectedgender2 = "girls";
             var newgenders2 = new List<string>() { "man", "woman", "kids", "girls" };
-            model.itemTagConfigList[1].Genders = newgenders2.Select(x => new SelectListItem()
+            string selectedgender2 = "man";
+            model.Antani = newgenders2.Select(x => new SelectListItem()
             {
                 Text = x.ToString(),
                 Value = x.ToString(),
                 Selected = selectedgender2 == x.ToString()
             });
-            model.itemTagConfigList[1].Selectedgender = selectedgender2;
+            model.AntaniSelected = selectedgender2;
+
+
+            model.itemTagConfigList[0].Genders = newgenders2.Select(x => new SelectListItem()
+            {
+                Text = x.ToString(),
+                Value = x.ToString(),
+                Selected = selectedgender2 == x.ToString()
+            });
+            model.itemTagConfigList[0].Selectedgender = selectedgender2;
+
             return View("Edit", model);
         }
     }
